@@ -244,6 +244,18 @@ class Color(object):
         return Color(cmy_mix, 'CMY')
 
     #
+    # Color Harmonies
+    # from: from https://github.com/bgrins/TinyColor/blob/master/tinycolor.js
+    #
+
+    # Triad
+    def triad(self):
+        (h, l, s) = self.hls
+        c2 = Color((((h + 120) % 360), s, l), 'HLS')
+        c3 = Color((((h + 240) % 360), s, l), 'HLS')
+        return (self, c2, c3)
+
+    #
     # INTERNAL
     #
     def _rgb_from_hex(self, color_value):
