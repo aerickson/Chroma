@@ -254,9 +254,10 @@ class Color(object):
         lower = (180 - distance) % 360
         upper = (180 + distance) % 360
         c2 = Color((lower, s, l), 'HLS')
-        c3 = Color(((upper, s, l), 'HLS')
+        c3 = Color((upper, s, l), 'HLS')
         return (self, c2, c3)
 
+    # uses distance of 60 from complement
     def triad(self):
         (h, l, s) = self.hls
         c2 = Color((((h + 120) % 360), s, l), 'HLS')
