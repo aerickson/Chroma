@@ -248,7 +248,15 @@ class Color(object):
     # from: from https://github.com/bgrins/TinyColor/blob/master/tinycolor.js
     #
 
-    # Triad
+    # Triad, per http://paletton.com/, 30 deg def (vs equally spaced / 60 degrees)
+    def triad_variable(self, distance=30):
+        (h, l, s) = self.hls
+        lower = (180 - distance) % 360
+        upper = (180 + distance) % 360
+        c2 = Color((lower, s, l), 'HLS')
+        c3 = Color(((upper, s, l), 'HLS')
+        return (self, c2, c3)
+
     def triad(self):
         (h, l, s) = self.hls
         c2 = Color((((h + 120) % 360), s, l), 'HLS')
