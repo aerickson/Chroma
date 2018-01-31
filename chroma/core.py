@@ -244,6 +244,27 @@ class Color(object):
         return Color(cmy_mix, 'CMY')
 
     #
+    # Color Harmonies
+    # from: from https://github.com/bgrins/TinyColor/blob/master/tinycolor.js
+    #
+
+    # Triad, per http://paletton.com/, 30 deg (vs equally spaced / 60 degrees)
+    def triad_variable(self, distance=30):
+        (h, l, s) = self.hls
+        lower = (180 - distance) % 360
+        upper = (180 + distance) % 360
+        c2 = Color((lower, s, l), 'HLS')
+        c3 = Color((upper, s, l), 'HLS')
+        return (self, c2, c3)
+
+    # uses distance of 60 from complement, 3 equal distances
+    def triad(self):
+        (h, l, s) = self.hls
+        c2 = Color((((h + 120) % 360), s, l), 'HLS')
+        c3 = Color((((h + 240) % 360), s, l), 'HLS')
+        return (self, c2, c3)
+
+    #
     # INTERNAL
     #
     def _rgb_from_hex(self, color_value):
